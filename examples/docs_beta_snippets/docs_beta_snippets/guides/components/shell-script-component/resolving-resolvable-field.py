@@ -24,7 +24,7 @@ class ShellCommand(Component):
     def build_defs(self, load_context: ComponentLoadContext) -> dg.Definitions:
         # highlight-start
         # resolve the script runner with its required additional scope
-        script_runner = self.params.resolve_properties(
+        script_runner = self.params.resolve(
             load_context.templated_value_resolver.with_scope(
                 get_script_runner=_get_script_runner
             )

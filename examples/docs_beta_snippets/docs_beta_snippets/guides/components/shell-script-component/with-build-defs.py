@@ -22,6 +22,8 @@ class ShellScriptSchema(BaseModel):
 
 @registered_component_type(name="shell_command")
 class ShellCommand(Component):
+    """Models a shell script as a Dagster asset."""
+
     def __init__(self, params: ShellScriptSchema):
         self.params = params
 
@@ -38,11 +40,11 @@ class ShellCommand(Component):
         return cls(params=params)
 
     def build_defs(self, load_context: ComponentLoadContext) -> dg.Definitions:
-        resolved_asset_attributes = self.params.asset_attributes.resolve_properties(
+        resolved_asset_attributes = self.params.asset_attributes.resolve(
             load_context.templated_value_resolver
         )
         resolved_op_properties = (
-            self.params.op.resolve_properties(load_context.templated_value_resolver)
+            self.params.op.resolve(load_context.templated_value_resolver)
             if self.params.op
             else {}
         )

@@ -21,6 +21,8 @@ class ShellScriptSchema(BaseModel):
 
 @registered_component_type(name="shell_command")
 class ShellCommand(Component):
+    """Models a shell script as a Dagster asset."""
+
     @classmethod
     def get_schema(cls) -> type[ShellScriptSchema]:
         # higlight-start
