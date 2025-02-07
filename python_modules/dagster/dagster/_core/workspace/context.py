@@ -677,7 +677,8 @@ class WorkspaceProcessContext(IWorkspaceProcessContext):
                     heartbeat_ttl=WEBSERVER_GRPC_SERVER_HEARTBEAT_TTL,
                     startup_timeout=instance.code_server_process_startup_timeout,
                     log_level=code_server_log_level,
-                    wait_for_processes_on_shutdown=instance.wait_for_local_code_server_processes_on_shutdown,
+                    # wait_for_processes_on_shutdown=instance.wait_for_local_code_server_processes_on_shutdown,
+                    wait_for_processes_on_shutdown=True,
                     additional_timeout_msg=INCREASE_TIMEOUT_DAGSTER_YAML_MSG,
                 )
             )
