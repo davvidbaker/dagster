@@ -149,3 +149,20 @@ def test_class():
     Foo.scream("hi")
     with pytest.raises(CheckError):
         Foo.scream(3)  # type: ignore
+
+
+def test_defaults():
+    @checked
+    def foo(a: int, b: int = 1):
+        return a + b
+
+    assert foo(0) == 1
+
+    # normal behavior for shared collections fn defaults
+    @checked
+    def bar(shared_list: list = []):
+        shared_list.append(1)
+        return shared_list
+
+    assert bar() == [1]
+    assert bar() == [1, 1]
