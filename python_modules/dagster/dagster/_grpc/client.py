@@ -328,8 +328,10 @@ class DagsterGrpcClient:
         res = self._query("ListRepositories", dagster_api_pb2.ListRepositoriesRequest)
         return res.serialized_list_repositories_response_or_error
 
-    async def gen_list_repositories(self) -> str:
-        res = await self._gen_query("ListRepositories", dagster_api_pb2.ListRepositoriesRequest)
+    async def gen_list_repositories(self, **kwargs) -> str:
+        res = await self._gen_query(
+            "ListRepositories", dagster_api_pb2.ListRepositoriesRequest, **kwargs
+        )
         return res.serialized_list_repositories_response_or_error
 
     def external_partition_names(self, partition_names_args: PartitionNamesArgs) -> str:
